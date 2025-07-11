@@ -2,20 +2,18 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      nodejs: 14
     commands:
-      - echo "No dependencies to install for static site"
+      - echo "No dependencies to install for static HTML/CSS site"
 
   build:
     commands:
-      - echo "No build step required for static site"
+      - echo "No build step required for static HTML/CSS site"
 
   post_build:
     commands:
-      - echo "Starting S3 sync..."
+      - echo "Deploying frontend to S3..."
       - aws s3 sync ./Frontend/ s3://cloudresume-portfolio --delete
-      - echo "Creating CloudFront cache invalidation..."
+      - echo "Invalidating CloudFront cache..."
       - aws cloudfront create-invalidation --distribution-id d20dywo6lz1slm --paths "/*"
 
 artifacts:
