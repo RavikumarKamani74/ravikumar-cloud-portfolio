@@ -1,21 +1,23 @@
-version: 0.2
-
-phases:
-  install:
-    commands:
-      - echo "No dependencies to install for static HTML/CSS site"
-
-  build:
-    commands:
-      - echo "No build step required for static HTML/CSS site"
-
-  post_build:
-    commands:
-      - echo "Deploying frontend to S3..."
-      - aws s3 sync ./Frontend/ s3://cloudresume-portfolio --delete
-      - echo "Invalidating CloudFront cache..."
-      - aws cloudfront create-invalidation --distribution-id d20dywo6lz1slm --paths "/*"
-
-artifacts:
-  files:
-    - '**/*'
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cloudresume-portfolio",
+        "arn:aws:s3:::cloudresume-portfolio/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "cloudfront:CreateInvalidation",
+      "Resource": "*"
+    }
+  ]
+}
