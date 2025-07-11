@@ -19,7 +19,7 @@ jobs:
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        role-to-assume: arn:aws:iam::358238714507:role/GitHubOIDC-DeployRole
+        role-to-assume: arn:aws:iam::358238714507:role/githu-CICD-resume
         aws-region: ap-south-2
 
     - name: Upload files to S3
