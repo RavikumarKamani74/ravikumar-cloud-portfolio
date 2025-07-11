@@ -2,15 +2,27 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14 # or your preferred Node.js version
     commands:
-      - echo Installing...
+      - echo Installing source NPM dependencies...
+      - npm install
+
   build:
     commands:
-      - echo Build phase started...
+      - echo Build started on `date`
+      - npm run build   # Change this if your build command is different
+
   post_build:
     commands:
-      - echo Uploading static files to S3...
-      - aws s3 sync . s3://cloudresume-portfolio/ --exclude ".git/*" --exclude "templates/*" --exclude "lambda/*" --delete
+      - echo Build completed on `date`
+
+      # Sync build directory to S3 bucket
+      - aws s3 sync build/ s3://cloudresume-portfolio --delete
+
+      # Invalidate CloudFront cache
+      - aws cloudfront create-invalidation --distribution-id d20dywo6lz1slm --paths "/*"
+
 artifacts:
   files:
     - '**/*'
