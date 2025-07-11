@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  StateAbbr:
+    Type: String
+    Default: ap-south-2
+  AccountID:
+    Type: String
+    Default: '358238714507'
+  ResumeTableName:
+    Type: String
+    Default: Resume
+  VisitorLambdaName:
+    Type: String
+    Default: Resume-challange
+  S3BucketName:
+    Type: String
+    Default: cloudresume-portfolio
+  SNSArn:
+    Type: String
+    Default: arn:aws:sns:ap-south-2:358238714507:Resume-SNS
+  CloudFrontDomain:
+    Type: String
+    Default: d20dywo6lz1slm.cloudfront.net
+  ApiId:
+    Type: String
+    Default: q0rz3eyl6c
