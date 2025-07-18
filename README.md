@@ -6,7 +6,7 @@ This project is part of the [Cloud Resume Challenge](https://cloudresumechalleng
 
 ## 🚀 Live Demo
 
-🔗 [https://d20dywo6lz1slm.cloudfront.net](https://d20dywo6lz1slm.cloudfront.net)
+🔗 [https://d20dywo6lz1slm.cloudfront.net](https://d20dywo6lz1slm.cloudfront.net/Frontend/index.html))
 
 ---
 
