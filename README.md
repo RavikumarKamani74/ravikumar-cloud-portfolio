@@ -15,7 +15,7 @@ This project is part of the [Cloud Resume Challenge](https://cloudresumechalleng
 - ✅ **Resume Hosting**: Static resume served via **Amazon S3 + CloudFront**
 - ✅ **Visitor Counter**: Real-time tracking using **API Gateway + Lambda + DynamoDB**
 - ✅ **Infrastructure as Code**: Entire infrastructure is defined in **AWS CloudFormation**
-- ✅ **CI/CD Pipeline**: Automated deployment using **GitHub Actions + IAM OIDC**
+- ✅ **CI/CD Pipeline**: Automated deployment using **GitHub Actions + IAM OIDC + CodeBuild + CodePipeLine + CodeDeploy**
 - ✅ **Monitoring & Alerts**: **CloudWatch Alarms** and **SNS notifications**
 - ✅ **Secure & Scalable**: Built on a fully serverless architecture
 
