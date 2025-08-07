@@ -13,54 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Configure AWS credentials using OIDC
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        role-to-assume: arn:aws:iam::358238714507:role/githu-CICD-resume
-        aws-region: us-east-1
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::358238714507:role/GitHubOIDC-DeployRole
+          aws-region: ap-south-2
 
-    - name: Upload files to S3
-      run: |
-        aws s3 sync . s3://cloudresume-portfolio --delete --exclude ".git/*" --exclude ".github/*"
+      - name: Upload files to S3
+        run: |
+          aws s3 sync . s3://cloudresume-portfolio --delete --exclude ".git/*" --exclude ".github/*"
 
-    - name: Invalidate CloudFront Cache
-      run: |
-        aws cloudfront create-invalidation \
-          --distribution-id D20DYWO6LZ1SLM \
-          --paths "/*"
-name: Deploy Static Website to S3 and Invalidate CloudFront
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  id-token: write
-  contents: read
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    - name: Configure AWS credentials using OIDC
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        role-to-assume: arn:aws:iam::358238714507:role/GitHubOIDC-DeployRole
-        aws-region: ap-south-2
-
-    - name: Upload files to S3
-      run: |
-        aws s3 sync . s3://cloudresume-portfolio --delete --exclude ".git/*" --exclude ".github/*"
-
-    - name: Invalidate CloudFront Cache
-      run: |
-        aws cloudfront create-invalidation \
-          --distribution-id D20DYWO6LZ1SLM \
-          --paths "/*"
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id D20DYWO6LZ1SLM \
+            --paths "/*"
